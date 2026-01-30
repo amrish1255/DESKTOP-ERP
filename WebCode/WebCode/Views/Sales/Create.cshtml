@@ -1,0 +1,250 @@
+@{
+    ViewData["Title"] = "Create Sales Invoice";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <div>
+            <h1>Create Sales Invoice</h1>
+            <p class="text-muted mb-0">Capture customer billing, items, and GST details.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to Sales</a>
+    </div>
+
+    <form asp-action="Create" method="post" class="erp-form">
+        @Html.AntiForgeryToken()
+        <div class="row g-4">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Invoice Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="InvoiceNumber">Invoice Number</label>
+                            <input class="form-control" id="InvoiceNumber" name="InvoiceNumber" placeholder="Auto-generated" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="InvoiceDate">Invoice Date</label>
+                            <input class="form-control" id="InvoiceDate" type="date" name="InvoiceDate" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Branch">Branch</label>
+                            <select class="form-select" id="Branch" name="Branch">
+                                <option value="">Select branch</option>
+                                <option value="Central">Central Branch</option>
+                                <option value="Warehouse">Warehouse 2</option>
+                                <option value="Retail">Retail Hub</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="PaymentTerms">Payment Terms</label>
+                            <select class="form-select" id="PaymentTerms" name="PaymentTerms">
+                                <option value="">Select terms</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Credit15">Credit - 15 Days</option>
+                                <option value="Credit30">Credit - 30 Days</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Customer Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="Customer">Customer</label>
+                            <input class="form-control" id="Customer" name="Customer" placeholder="Select customer" list="CustomerList" />
+                            <datalist id="CustomerList">
+                                <option value="Sunrise Traders"></option>
+                                <option value="Metro Retail Mart"></option>
+                                <option value="Global Supply Hub"></option>
+                            </datalist>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="ShippingAddress">Shipping Address</label>
+                            <textarea class="form-control" id="ShippingAddress" name="ShippingAddress" rows="3" placeholder="Delivery address"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="GstNumber">GST Number</label>
+                            <input class="form-control" id="GstNumber" name="GstNumber" placeholder="27ABCDE1234F1Z5" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="PlaceOfSupply">Place of Supply</label>
+                            <select class="form-select" id="PlaceOfSupply" name="PlaceOfSupply">
+                                <option value="">Select State</option>
+                                <option value="MH">Maharashtra</option>
+                                <option value="KA">Karnataka</option>
+                                <option value="GJ">Gujarat</option>
+                                <option value="DL">Delhi</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Billing Summary</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <label class="form-label" for="Subtotal">Taxable Value</label>
+                                <input class="form-control" id="Subtotal" name="Subtotal" placeholder="₹ 0.00" />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label" for="Discount">Discount</label>
+                                <input class="form-control" id="Discount" name="Discount" placeholder="₹ 0.00" />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label" for="GstAmount">GST Amount</label>
+                                <input class="form-control" id="GstAmount" name="GstAmount" placeholder="₹ 0.00" />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label" for="RoundOff">Round Off</label>
+                                <input class="form-control" id="RoundOff" name="RoundOff" placeholder="₹ 0.00" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="GrandTotal">Grand Total</label>
+                                <input class="form-control" id="GrandTotal" name="GrandTotal" placeholder="₹ 0.00" />
+                            </div>
+                        </div>
+                        <div class="mt-3 form-check">
+                            <input class="form-check-input" id="EwayBillRequired" name="EwayBillRequired" type="checkbox" />
+                            <label class="form-check-label" for="EwayBillRequired">Generate e-Way Bill</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="card-title mb-0">Invoice Items</h2>
+                <button type="button" class="btn btn-sm btn-outline-primary">Add Line</button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle erp-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col">HSN / SAC</th>
+                                <th scope="col" class="text-end">Qty</th>
+                                <th scope="col" class="text-end">Rate</th>
+                                <th scope="col" class="text-end">Discount</th>
+                                <th scope="col" class="text-end">GST %</th>
+                                <th scope="col" class="text-end">Amount</th>
+                                <th scope="col" class="text-center" style="width: 110px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input class="form-control" name="Items[0].Name" placeholder="Select item" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Items[0].Hsn" placeholder="HSN" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Items[0].Quantity" placeholder="0" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Items[0].Rate" placeholder="₹ 0.00" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Items[0].Discount" placeholder="₹ 0.00" />
+                                </td>
+                                <td>
+                                    <select class="form-select text-end" name="Items[0].GstRate">
+                                        <option value="0">0</option>
+                                        <option value="5">5</option>
+                                        <option value="12">12</option>
+                                        <option value="18">18</option>
+                                        <option value="28">28</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Items[0].Amount" placeholder="₹ 0.00" />
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <button type="button" class="btn btn-sm btn-outline-primary">Clone</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="form-control" name="Items[1].Name" placeholder="Select item" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Items[1].Hsn" placeholder="HSN" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Items[1].Quantity" placeholder="0" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Items[1].Rate" placeholder="₹ 0.00" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Items[1].Discount" placeholder="₹ 0.00" />
+                                </td>
+                                <td>
+                                    <select class="form-select text-end" name="Items[1].GstRate">
+                                        <option value="0">0</option>
+                                        <option value="5">5</option>
+                                        <option value="12">12</option>
+                                        <option value="18">18</option>
+                                        <option value="28">28</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Items[1].Amount" placeholder="₹ 0.00" />
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <button type="button" class="btn btn-sm btn-outline-primary">Clone</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="table-light">
+                            <tr>
+                                <td colspan="6" class="text-end fw-semibold">Total Taxable</td>
+                                <td colspan="2">
+                                    <input class="form-control text-end" name="Summary.Taxable" placeholder="₹ 0.00" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="text-end fw-semibold">Total GST</td>
+                                <td colspan="2">
+                                    <input class="form-control text-end" name="Summary.Gst" placeholder="₹ 0.00" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" class="text-end fw-semibold">Grand Total</td>
+                                <td colspan="2">
+                                    <input class="form-control text-end" name="Summary.Total" placeholder="₹ 0.00" />
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions mt-4">
+            <button type="submit" class="btn btn-primary">Save &amp; Print</button>
+            <button type="button" class="btn btn-outline-secondary">Save Draft</button>
+            <button type="reset" class="btn btn-outline-danger">Clear</button>
+        </div>
+    </form>
+</section>

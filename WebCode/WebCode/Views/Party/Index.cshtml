@@ -1,0 +1,92 @@
+@{
+    ViewData["Title"] = "Party Master";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <h1>Party Master</h1>
+        <div class="section-actions">
+            <a class="btn btn-primary" asp-action="Create">Add Party</a>
+            <button type="button" class="btn btn-outline-secondary">Import</button>
+        </div>
+    </div>
+
+    <form class="filter-panel row g-3 align-items-end" method="get">
+        <div class="col-md-4">
+            <label class="form-label" for="PartyName">Party Name</label>
+            <input class="form-control" id="PartyName" name="partyName" placeholder="Search by customer / supplier" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" for="PartyType">Type</label>
+            <select class="form-select" id="PartyType" name="partyType">
+                <option value="">All</option>
+                <option value="Customer">Customer</option>
+                <option value="Supplier">Supplier</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" for="City">City</label>
+            <input class="form-control" id="City" name="city" placeholder="City" />
+        </div>
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">Apply</button>
+            <button type="reset" class="btn btn-link flex-fill">Reset</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover erp-table">
+            <thead>
+                <tr>
+                    <th scope="col">Party Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">GSTIN</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Outstanding</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sunrise Traders</td>
+                    <td><span class="badge text-bg-primary">Customer</span></td>
+                    <td>27AAECS1234G1Z8</td>
+                    <td>Pune</td>
+                    <td class="text-success fw-semibold">₹ 1,24,500.00</td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Ledger</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Global Supply Hub</td>
+                    <td><span class="badge text-bg-warning">Supplier</span></td>
+                    <td>29AACCG5678D1Z2</td>
+                    <td>Bengaluru</td>
+                    <td class="text-danger fw-semibold">₹ 86,300.00</td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Ledger</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Metro Retail Mart</td>
+                    <td><span class="badge text-bg-primary">Customer</span></td>
+                    <td>24AAECM9876H1Z1</td>
+                    <td>Ahmedabad</td>
+                    <td class="text-success fw-semibold">₹ 45,980.00</td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Ledger</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

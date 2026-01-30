@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <h1>Reports Dashboard</h1>
+        <div class="section-actions">
+            <a class="btn btn-primary" asp-action="SalesReport">Sales Report</a>
+            <a class="btn btn-outline-primary" asp-action="GstReport">GST Report</a>
+            <a class="btn btn-outline-secondary" asp-action="OutstandingReport">Outstanding Report</a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="report-card card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Sales Performance</h2>
+                    <p class="text-muted">Track invoices, taxable value, GST collected, and top customers.</p>
+                    <ul class="report-points">
+                        <li>Monthly and daily trends</li>
+                        <li>Top five items by revenue</li>
+                        <li>Branch-wise performance</li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-transparent border-0 d-flex justify-content-end">
+                    <a class="btn btn-sm btn-primary" asp-action="SalesReport">Open Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="report-card card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">GST Compliance</h2>
+                    <p class="text-muted">Summaries for GSTR-1 sections, tax liability, and filing preparation.</p>
+                    <ul class="report-points">
+                        <li>B2B / B2C split</li>
+                        <li>HSN summary</li>
+                        <li>Liability vs. payment</li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-transparent border-0 d-flex justify-content-end">
+                    <a class="btn btn-sm btn-primary" asp-action="GstReport">Open Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="report-card card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Outstanding Analysis</h2>
+                    <p class="text-muted">Customer balances, aging buckets, and overdue invoices.</p>
+                    <ul class="report-points">
+                        <li>Aging summary (0-30 / 31-60 / 60+)</li>
+                        <li>Customer risk categories</li>
+                        <li>Payment follow-up list</li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-transparent border-0 d-flex justify-content-end">
+                    <a class="btn btn-sm btn-primary" asp-action="OutstandingReport">Open Report</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Quick KPIs</h2>
+        </div>
+        <div class="card-body">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="kpi-tile">
+                        <span class="kpi-label">MTD Sales</span>
+                        <span class="kpi-value text-primary">₹ 48,25,500</span>
+                        <span class="kpi-trend text-success">▲ 12% vs last month</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-tile">
+                        <span class="kpi-label">GST Liability</span>
+                        <span class="kpi-value text-danger">₹ 5,84,320</span>
+                        <span class="kpi-trend text-muted">Due by 20 Feb</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-tile">
+                        <span class="kpi-label">Outstanding Receivables</span>
+                        <span class="kpi-value text-warning">₹ 18,40,900</span>
+                        <span class="kpi-trend text-danger">▲ 8% overdue</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-tile">
+                        <span class="kpi-label">Average Collection Days</span>
+                        <span class="kpi-value text-success">34 days</span>
+                        <span class="kpi-trend text-success">▼ Improved by 3 days</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

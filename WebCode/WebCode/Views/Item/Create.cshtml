@@ -1,0 +1,146 @@
+@{
+    ViewData["Title"] = "Create Item";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <div>
+            <h1>Add Inventory Item</h1>
+            <p class="text-muted mb-0">Capture product, pricing, and stock details.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to Items</a>
+    </div>
+
+    <form asp-action="Create" method="post" class="row g-4 erp-form">
+        @Html.AntiForgeryToken()
+        <div class="col-xl-5">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Item Information</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="ItemName">Item Name</label>
+                        <input class="form-control" id="ItemName" name="ItemName" placeholder="Product or material name" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="Sku">SKU / Code</label>
+                            <input class="form-control" id="Sku" name="Sku" placeholder="SKU12345" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="Barcode">Barcode</label>
+                            <input class="form-control" id="Barcode" name="Barcode" placeholder="EAN / UPC" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="Category">Category</label>
+                            <select class="form-select" id="Category" name="Category">
+                                <option value="">Select category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="RawMaterial">Raw Material</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="Unit">Unit</label>
+                            <select class="form-select" id="Unit" name="Unit">
+                                <option value="Nos">Nos</option>
+                                <option value="Kg">Kg</option>
+                                <option value="Litre">Litre</option>
+                                <option value="Meter">Meter</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Description">Description</label>
+                        <textarea class="form-control" id="Description" name="Description" rows="3" placeholder="Item specification or remarks"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Pricing &amp; Tax</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="PurchasePrice">Purchase Price</label>
+                        <input class="form-control" id="PurchasePrice" name="PurchasePrice" placeholder="₹ 0.00" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="SalesPrice">Sales Price</label>
+                        <input class="form-control" id="SalesPrice" name="SalesPrice" placeholder="₹ 0.00" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Mrp">MRP</label>
+                        <input class="form-control" id="Mrp" name="Mrp" placeholder="₹ 0.00" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="GstRate">GST (%)</label>
+                        <select class="form-select" id="GstRate" name="GstRate">
+                            <option value="0">0</option>
+                            <option value="5">5</option>
+                            <option value="12">12</option>
+                            <option value="18">18</option>
+                            <option value="28">28</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Stock Controls</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="OpeningStock">Opening Stock</label>
+                            <input class="form-control" id="OpeningStock" name="OpeningStock" placeholder="0" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="ReorderLevel">Reorder Level</label>
+                            <input class="form-control" id="ReorderLevel" name="ReorderLevel" placeholder="50" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="MinStock">Minimum Stock</label>
+                            <input class="form-control" id="MinStock" name="MinStock" placeholder="20" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="MaxStock">Maximum Stock</label>
+                            <input class="form-control" id="MaxStock" name="MaxStock" placeholder="500" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Warehouse">Primary Warehouse</label>
+                        <select class="form-select" id="Warehouse" name="Warehouse">
+                            <option value="">Select warehouse</option>
+                            <option value="Main">Main Warehouse</option>
+                            <option value="Secondary">Secondary Storage</option>
+                            <option value="Retail">Retail Store</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Status">Status</label>
+                        <select class="form-select" id="Status" name="Status">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Item</button>
+                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "Cancel Invoice";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <h1>Cancel Bill (No Delete)</h1>
+        <div class="section-actions">
+            <a class="btn btn-primary" asp-action="Create">Request Cancellation</a>
+            <button type="button" class="btn btn-outline-secondary">Download Log</button>
+        </div>
+    </div>
+
+    <form class="filter-panel row g-3 align-items-end" method="get">
+        <div class="col-lg-3">
+            <label class="form-label" for="InvoiceNumber">Invoice #</label>
+            <input class="form-control" id="InvoiceNumber" name="invoiceNumber" placeholder="Search invoice to cancel" />
+        </div>
+        <div class="col-lg-3">
+            <label class="form-label" for="Customer">Customer</label>
+            <input class="form-control" id="Customer" name="customer" placeholder="Customer name" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-label" for="CancelStatus">Status</label>
+            <select class="form-select" id="CancelStatus" name="status">
+                <option value="">All</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+        </div>
+        <div class="col-lg-2">
+            <label class="form-label" for="RaisedFrom">Raised From</label>
+            <input class="form-control" id="RaisedFrom" type="date" name="fromDate" />
+        </div>
+        <div class="col-lg-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">Filter</button>
+            <button type="reset" class="btn btn-link flex-fill">Reset</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover erp-table">
+            <thead>
+                <tr>
+                    <th scope="col">Invoice #</th>
+                    <th scope="col">Invoice Date</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Reason</th>
+                    <th scope="col">Requested By</th>
+                    <th scope="col">Request Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>INV-2026-00112</td>
+                    <td>25 Jan 2026</td>
+                    <td>Sunrise Traders</td>
+                    <td>Rate correction required</td>
+                    <td>Anita Rao</td>
+                    <td>27 Jan 2026</td>
+                    <td><span class="status-badge status-pending">Pending</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <a class="btn btn-sm btn-outline-primary" asp-action="Create">Review</a>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Logs</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>INV-2026-00105</td>
+                    <td>20 Jan 2026</td>
+                    <td>Metro Retail Mart</td>
+                    <td>Duplicate invoice</td>
+                    <td>Ravi Sharma</td>
+                    <td>22 Jan 2026</td>
+                    <td><span class="status-badge status-approved">Approved</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>INV-2026-00098</td>
+                    <td>16 Jan 2026</td>
+                    <td>Global Supply Hub</td>
+                    <td>Wrong customer address</td>
+                    <td>Neha Patel</td>
+                    <td>18 Jan 2026</td>
+                    <td><span class="status-badge status-rejected">Rejected</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Comments</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

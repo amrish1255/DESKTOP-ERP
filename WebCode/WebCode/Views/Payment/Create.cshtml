@@ -1,0 +1,176 @@
+@{
+    ViewData["Title"] = "Record Payment";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <div>
+            <h1>Record Payment</h1>
+            <p class="text-muted mb-0">Apply receipts against invoices and update outstanding balance.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to Outstanding</a>
+    </div>
+
+    <form asp-action="Create" method="post" class="erp-form">
+        @Html.AntiForgeryToken()
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Party Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="Party">Party</label>
+                            <input class="form-control" id="Party" name="Party" placeholder="Select party" list="PartyList" />
+                            <datalist id="PartyList">
+                                <option value="Sunrise Traders"></option>
+                                <option value="Metro Retail Mart"></option>
+                                <option value="Global Supply Hub"></option>
+                            </datalist>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="LinkedInvoice">Invoice Reference</label>
+                            <input class="form-control" id="LinkedInvoice" name="LinkedInvoice" placeholder="INV-2026-00121" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="OutstandingAmount">Outstanding</label>
+                            <input class="form-control" id="OutstandingAmount" name="OutstandingAmount" placeholder="₹ 0.00" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="DueDate">Due Date</label>
+                            <input class="form-control" id="DueDate" type="date" name="DueDate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Receipt Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="ReceiptNumber">Receipt Number</label>
+                            <input class="form-control" id="ReceiptNumber" name="ReceiptNumber" placeholder="RCPT-2026-00089" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="ReceiptDate">Receipt Date</label>
+                            <input class="form-control" id="ReceiptDate" type="date" name="ReceiptDate" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="AmountReceived">Amount Received</label>
+                            <input class="form-control" id="AmountReceived" name="AmountReceived" placeholder="₹ 0.00" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="TdsAmount">TDS Deducted</label>
+                            <input class="form-control" id="TdsAmount" name="TdsAmount" placeholder="₹ 0.00" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Mode of Payment</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="PaymentMode">Payment Mode</label>
+                            <select class="form-select" id="PaymentMode" name="PaymentMode">
+                                <option value="">Select mode</option>
+                                <option value="Cash">Cash</option>
+                                <option value="BankTransfer">Bank Transfer</option>
+                                <option value="Cheque">Cheque</option>
+                                <option value="UPI">UPI</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="BankName">Bank / Wallet</label>
+                            <input class="form-control" id="BankName" name="BankName" placeholder="Bank or payment channel" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Reference">Reference</label>
+                            <input class="form-control" id="Reference" name="Reference" placeholder="Transaction / Cheque number" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Notes">Notes</label>
+                            <textarea class="form-control" id="Notes" name="Notes" rows="3" placeholder="Internal notes or remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="card-title mb-0">Allocate Payment</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle erp-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Invoice #</th>
+                                <th scope="col">Invoice Date</th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col">Invoice Amount</th>
+                                <th scope="col">Outstanding</th>
+                                <th scope="col">Amount to Apply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input class="form-control" name="Allocations[0].InvoiceNumber" placeholder="Invoice number" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Allocations[0].InvoiceDate" type="date" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Allocations[0].DueDate" type="date" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Allocations[0].InvoiceAmount" placeholder="₹ 0.00" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Allocations[0].Outstanding" placeholder="₹ 0.00" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Allocations[0].AppliedAmount" placeholder="₹ 0.00" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="form-control" name="Allocations[1].InvoiceNumber" placeholder="Invoice number" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Allocations[1].InvoiceDate" type="date" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Allocations[1].DueDate" type="date" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Allocations[1].InvoiceAmount" placeholder="₹ 0.00" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Allocations[1].Outstanding" placeholder="₹ 0.00" />
+                                </td>
+                                <td>
+                                    <input class="form-control text-end" name="Allocations[1].AppliedAmount" placeholder="₹ 0.00" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions mt-4">
+            <button type="submit" class="btn btn-primary">Save Payment</button>
+            <button type="reset" class="btn btn-outline-secondary">Clear</button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,122 @@
+@{
+    ViewData["Title"] = "Create Company";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <div>
+            <h1>Create Company Profile</h1>
+            <p class="text-muted mb-0">Enter company and branch details for ERP operations.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+    </div>
+
+    <form asp-action="Create" method="post" class="row g-4 erp-form">
+        @Html.AntiForgeryToken()
+        <div class="col-12 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Company Information</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="CompanyName">Company Name</label>
+                        <input class="form-control" id="CompanyName" name="CompanyName" placeholder="Enter registered company name" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="LegalName">Legal Name</label>
+                        <input class="form-control" id="LegalName" name="LegalName" placeholder="As per GST registration" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="GstNumber">GST Number</label>
+                            <input class="form-control" id="GstNumber" name="GstNumber" placeholder="27AAECA1234F1Z5" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="PanNumber">PAN</label>
+                            <input class="form-control" id="PanNumber" name="PanNumber" placeholder="AAECA1234F" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Email">Email</label>
+                        <input class="form-control" id="Email" type="email" name="Email" placeholder="contact@company.com" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Phone">Phone</label>
+                        <input class="form-control" id="Phone" name="Phone" placeholder="+91 98765 43210" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Address">Registered Address</label>
+                        <textarea class="form-control" id="Address" name="Address" rows="3" placeholder="Street, City, State, PIN"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Primary Branch Details</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="BranchName">Branch Name</label>
+                        <input class="form-control" id="BranchName" name="BranchName" placeholder="Head Office / Warehouse / Retail" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="BranchCode">Branch Code</label>
+                            <input class="form-control" id="BranchCode" name="BranchCode" placeholder="BR-001" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="State">State</label>
+                            <select class="form-select" id="State" name="State">
+                                <option value="">Select state</option>
+                                <option value="MH">Maharashtra</option>
+                                <option value="KA">Karnataka</option>
+                                <option value="DL">Delhi</option>
+                                <option value="GJ">Gujarat</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="City">City</label>
+                            <input class="form-control" id="City" name="City" placeholder="Mumbai" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="PostalCode">PIN Code</label>
+                            <input class="form-control" id="PostalCode" name="PostalCode" placeholder="400001" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="BranchAddress">Branch Address</label>
+                        <textarea class="form-control" id="BranchAddress" name="BranchAddress" rows="3" placeholder="Address for branch operations"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="ContactPerson">Contact Person</label>
+                        <input class="form-control" id="ContactPerson" name="ContactPerson" placeholder="Branch manager name" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="ContactNumber">Contact Number</label>
+                        <input class="form-control" id="ContactNumber" name="ContactNumber" placeholder="+91 91234 56789" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Status">Status</label>
+                        <select class="form-select" id="Status" name="Status">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Company</button>
+                <button type="reset" class="btn btn-outline-secondary">Clear</button>
+            </div>
+        </div>
+    </form>
+</section>

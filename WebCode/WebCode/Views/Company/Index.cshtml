@@ -1,0 +1,88 @@
+@{
+    ViewData["Title"] = "Company & Branch Management";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <h1>Company &amp; Branch Management</h1>
+        <div class="section-actions">
+            <a class="btn btn-primary" asp-action="Create">Create Company</a>
+            <button type="button" class="btn btn-outline-secondary">Export</button>
+        </div>
+    </div>
+
+    <form class="filter-panel row g-3 align-items-end" method="get">
+        <div class="col-lg-4">
+            <label class="form-label" for="CompanyName">Company</label>
+            <input class="form-control" id="CompanyName" name="companyName" placeholder="Search by company name" />
+        </div>
+        <div class="col-lg-4">
+            <label class="form-label" for="BranchName">Branch</label>
+            <input class="form-control" id="BranchName" name="branchName" placeholder="Search by branch" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-label" for="Status">Status</label>
+            <select class="form-select" id="Status" name="status">
+                <option value="">All</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+        <div class="col-lg-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">Filter</button>
+            <button type="reset" class="btn btn-link flex-fill">Reset</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover erp-table">
+            <thead>
+                <tr>
+                    <th scope="col">Company</th>
+                    <th scope="col">Primary Branch</th>
+                    <th scope="col">GSTIN</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Acme Corporation Pvt. Ltd.</td>
+                    <td>Central Branch</td>
+                    <td>27AAECA1234F1Z5</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Branches</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Northwind Exports</td>
+                    <td>Warehouse 2</td>
+                    <td>29AACCN1234D1Z6</td>
+                    <td><span class="status-badge status-inactive">Inactive</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Branches</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bright Future Stores</td>
+                    <td>Retail Hub</td>
+                    <td>24AAECB7654E1Z3</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Branches</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

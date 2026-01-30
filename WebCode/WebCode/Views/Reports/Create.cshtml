@@ -1,0 +1,122 @@
+@{
+    ViewData["Title"] = "Create Report";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <div>
+            <h1>Custom Report Builder</h1>
+            <p class="text-muted mb-0">Configure filters and scheduling for recurring ERP reports.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to Dashboard</a>
+    </div>
+
+    <form asp-action="Create" method="post" class="erp-form">
+        @Html.AntiForgeryToken()
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Report Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="ReportName">Report Name</label>
+                            <input class="form-control" id="ReportName" name="ReportName" placeholder="Monthly Sales Summary" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="ReportType">Report Type</label>
+                            <select class="form-select" id="ReportType" name="ReportType">
+                                <option value="">Select report</option>
+                                <option value="Sales">Sales Report</option>
+                                <option value="Gst">GST Report</option>
+                                <option value="Outstanding">Outstanding Report</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Format">Output Format</label>
+                            <select class="form-select" id="Format" name="Format">
+                                <option value="PDF">PDF</option>
+                                <option value="Excel">Excel</option>
+                                <option value="CSV">CSV</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Filters</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="FromDate">From</label>
+                                <input class="form-control" id="FromDate" type="date" name="FromDate" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="ToDate">To</label>
+                                <input class="form-control" id="ToDate" type="date" name="ToDate" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Branch">Branch</label>
+                            <select class="form-select" id="Branch" name="Branch">
+                                <option value="">All branches</option>
+                                <option value="Central">Central Branch</option>
+                                <option value="Warehouse">Warehouse 2</option>
+                                <option value="Retail">Retail Hub</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Party">Party / Customer Group</label>
+                            <input class="form-control" id="Party" name="Party" placeholder="Leave blank for all parties" />
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="IncludeCancelled" name="IncludeCancelled" type="checkbox" />
+                            <label class="form-check-label" for="IncludeCancelled">Include cancelled invoices</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Scheduling</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="ScheduleFrequency">Frequency</label>
+                            <select class="form-select" id="ScheduleFrequency" name="ScheduleFrequency">
+                                <option value="Manual">Manual</option>
+                                <option value="Daily">Daily</option>
+                                <option value="Weekly">Weekly</option>
+                                <option value="Monthly">Monthly</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="ScheduleTime">Preferred Time</label>
+                            <input class="form-control" id="ScheduleTime" type="time" name="ScheduleTime" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Recipients">Email Recipients</label>
+                            <textarea class="form-control" id="Recipients" name="Recipients" rows="3" placeholder="Comma separated email addresses"></textarea>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" id="SendSummary" name="SendSummary" type="checkbox" />
+                            <label class="form-check-label" for="SendSummary">Attach summary snapshot</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions mt-4">
+            <button type="submit" class="btn btn-primary">Save Report</button>
+            <button type="reset" class="btn btn-outline-secondary">Clear</button>
+        </div>
+    </form>
+</section>
