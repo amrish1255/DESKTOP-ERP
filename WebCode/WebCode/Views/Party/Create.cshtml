@@ -1,0 +1,128 @@
+@{
+    ViewData["Title"] = "Create Party";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <div>
+            <h1>Create Party</h1>
+            <p class="text-muted mb-0">Register new customers or suppliers with essential details.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to Master</a>
+    </div>
+
+    <form asp-action="Create" method="post" class="row g-4 erp-form">
+        @Html.AntiForgeryToken()
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Primary Details</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="PartyName">Party Name</label>
+                            <input class="form-control" id="PartyName" name="PartyName" placeholder="Registered party name" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label" for="PartyType">Type</label>
+                            <select class="form-select" id="PartyType" name="PartyType">
+                                <option value="">Select</option>
+                                <option value="Customer">Customer</option>
+                                <option value="Supplier">Supplier</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label" for="PartyCode">Party Code</label>
+                            <input class="form-control" id="PartyCode" name="PartyCode" placeholder="Auto-generated / manual" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="Email">Email</label>
+                            <input class="form-control" id="Email" type="email" name="Email" placeholder="party@email.com" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="Mobile">Mobile</label>
+                            <input class="form-control" id="Mobile" name="Mobile" placeholder="+91 98765 12345" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="BillingAddress">Billing Address</label>
+                        <textarea class="form-control" id="BillingAddress" name="BillingAddress" rows="3" placeholder="Street, City, State, PIN"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="City">City</label>
+                            <input class="form-control" id="City" name="City" placeholder="City" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="State">State</label>
+                            <select class="form-select" id="State" name="State">
+                                <option value="">Select</option>
+                                <option value="MH">Maharashtra</option>
+                                <option value="KA">Karnataka</option>
+                                <option value="GJ">Gujarat</option>
+                                <option value="RJ">Rajasthan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="PostalCode">PIN Code</label>
+                            <input class="form-control" id="PostalCode" name="PostalCode" placeholder="400001" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Tax &amp; Credit Settings</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="GstNumber">GST Number</label>
+                        <input class="form-control" id="GstNumber" name="GstNumber" placeholder="27AAECS1234G1Z8" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="PanNumber">PAN</label>
+                        <input class="form-control" id="PanNumber" name="PanNumber" placeholder="AAECS1234G" />
+                    </div>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="CreditLimit">Credit Limit</label>
+                            <input class="form-control" id="CreditLimit" name="CreditLimit" placeholder="₹ 0.00" />
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="CreditDays">Credit Days</label>
+                            <input class="form-control" id="CreditDays" name="CreditDays" placeholder="30" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="PaymentTerms">Payment Terms</label>
+                        <select class="form-select" id="PaymentTerms" name="PaymentTerms">
+                            <option value="">Select terms</option>
+                            <option value="Advance">Advance</option>
+                            <option value="Net15">Net 15</option>
+                            <option value="Net30">Net 30</option>
+                            <option value="Net45">Net 45</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="Status">Status</label>
+                        <select class="form-select" id="Status" name="Status">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Party</button>
+                <button type="reset" class="btn btn-outline-secondary">Clear</button>
+            </div>
+        </div>
+    </form>
+</section>

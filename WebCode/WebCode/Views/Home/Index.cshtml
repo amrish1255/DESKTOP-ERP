@@ -1,8 +1,116 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<header class="erp-dashboard__header">
+    <div>
+        <h1 class="erp-dashboard__title">Operational Overview</h1>
+        <p class="erp-dashboard__subtitle">Real-time snapshot of ERP performance</p>
+    </div>
+    <div class="erp-dashboard__status">
+        <span class="status-pill success">DB Connected: LocalDB</span>
+        <span class="status-avatar" aria-hidden="true">
+            <svg viewBox="0 0 32 32" class="icon">
+                <path d="M16 4a7 7 0 1 1-7 7 7 7 0 0 1 7-7z" />
+                <path d="M6 28a10 10 0 0 1 20 0v1H6z" opacity=".35" />
+            </svg>
+        </span>
+    </div>
+</header>
+
+<div class="erp-dashboard__content">
+    <div class="erp-dashboard__stats">
+        <article class="stat-card tone-blue">
+            <div class="stat-card__icon">
+                <svg viewBox="0 0 24 24" class="icon">
+                    <path d="M5 5h14v4H5z" />
+                    <path d="M5 9h14l-2 10H7z" opacity=".35" />
+                    <path d="M9 12h2v4H9zM13 11h2v5h-2z" />
+                </svg>
+            </div>
+            <div class="stat-card__body">
+                <p class="stat-card__label">Sales (GST Incl.)</p>
+                <p class="stat-card__value">₹45,200</p>
+            </div>
+        </article>
+        <article class="stat-card tone-red">
+            <div class="stat-card__icon">
+                <svg viewBox="0 0 24 24" class="icon">
+                    <path d="M12 2a1 1 0 0 1 .87.5l9 15.59A1 1 0 0 1 21 20H3a1 1 0 0 1-.87-1.91l9-15.59A1 1 0 0 1 12 2z" />
+                    <path d="M11 9h2v5h-2zM11 15h2v2h-2z" fill="#f1f5f9" />
+                </svg>
+            </div>
+            <div class="stat-card__body">
+                <p class="stat-card__label">Outstanding</p>
+                <p class="stat-card__value">₹12,850</p>
+            </div>
+        </article>
+        <article class="stat-card tone-amber">
+            <div class="stat-card__icon">
+                <svg viewBox="0 0 24 24" class="icon">
+                    <path d="M4 5h16v14H4z" />
+                    <path d="M8 9h8v2H8zM8 13h5v2H8z" fill="#0f172a" opacity=".35" />
+                </svg>
+            </div>
+            <div class="stat-card__body">
+                <p class="stat-card__label">Low Stock Items</p>
+                <p class="stat-card__value">08</p>
+            </div>
+        </article>
+        <article class="stat-card tone-green">
+            <div class="stat-card__icon">
+                <svg viewBox="0 0 24 24" class="icon">
+                    <path d="M4 5h16v14H4z" />
+                    <path d="M9 12l3 3 5-5" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="stat-card__body">
+                <p class="stat-card__label">Ledger Postings</p>
+                <p class="stat-card__value underline">Synced</p>
+            </div>
+        </article>
+    </div>
+
+    <div class="erp-dashboard__panel">
+        <div class="erp-dashboard__panel-header">
+            <h2>Recent Sales Transactions</h2>
+            <a class="panel-button" asp-area="" asp-controller="Sales" asp-action="Create">+ New Bill</a>
+        </div>
+        <div class="erp-dashboard__table-wrapper">
+            <table class="erp-dashboard__table">
+                <thead>
+                    <tr>
+                        <th scope="col">Bill No.</th>
+                        <th scope="col">Party Name</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">GST (18%)</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INV-101</td>
+                        <td>Suresh Traders</td>
+                        <td>₹5,000</td>
+                        <td>₹900</td>
+                        <td>
+                            <span class="status-pill success">Paid</span>
+                        </td>
+                        <td><a class="table-link" asp-area="" asp-controller="Sales" asp-action="Index">View</a></td>
+                    </tr>
+                    <tr class="is-cancelled">
+                        <td>INV-102</td>
+                        <td>Modern Solutions</td>
+                        <td>₹2,500</td>
+                        <td>₹450</td>
+                        <td>
+                            <span class="status-pill danger italic">Cancelled</span>
+                        </td>
+                        <td class="note">No Delete [cite: 16]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

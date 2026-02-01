@@ -1,0 +1,102 @@
+@{
+    ViewData["Title"] = "Item & Inventory";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <h1>Item &amp; Inventory Management</h1>
+        <div class="section-actions">
+            <a class="btn btn-primary" asp-action="Create">Add Item</a>
+            <button type="button" class="btn btn-outline-secondary">Stock Adjustment</button>
+        </div>
+    </div>
+
+    <form class="filter-panel row g-3 align-items-end" method="get">
+        <div class="col-md-4">
+            <label class="form-label" for="ItemSearch">Item</label>
+            <input class="form-control" id="ItemSearch" name="item" placeholder="Search by name or SKU" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" for="Category">Category</label>
+            <select class="form-select" id="Category" name="category">
+                <option value="">All categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="RawMaterial">Raw Material</option>
+                <option value="Retail">Retail</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" for="StockStatus">Stock Status</label>
+            <select class="form-select" id="StockStatus" name="stockStatus">
+                <option value="">All</option>
+                <option value="InStock">In Stock</option>
+                <option value="LowStock">Low Stock</option>
+                <option value="OutOfStock">Out of Stock</option>
+            </select>
+        </div>
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">Filter</button>
+            <button type="reset" class="btn btn-link flex-fill">Clear</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover erp-table">
+            <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Available Qty</th>
+                    <th scope="col">Reorder Level</th>
+                    <th scope="col">MRP</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>LED Panel Light 18W</td>
+                    <td>LED-PL-18W</td>
+                    <td>Electronics</td>
+                    <td><span class="text-success fw-semibold">320</span></td>
+                    <td>150</td>
+                    <td>₹ 899.00</td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Ledger</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Steel Sheet 1mm</td>
+                    <td>STL-SH-001</td>
+                    <td>Raw Material</td>
+                    <td><span class="text-warning fw-semibold">75</span></td>
+                    <td>100</td>
+                    <td>₹ 1,250.00</td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Ledger</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Premium Office Chair</td>
+                    <td>FUR-OC-100</td>
+                    <td>Retail</td>
+                    <td><span class="text-danger fw-semibold">12</span></td>
+                    <td>30</td>
+                    <td>₹ 5,900.00</td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Ledger</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

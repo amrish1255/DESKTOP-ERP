@@ -1,0 +1,156 @@
+@{
+    ViewData["Title"] = "Cancel Invoice";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <div>
+            <h1>Cancel Invoice Request</h1>
+            <p class="text-muted mb-0">Submit a cancellation request with mandatory supporting details.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to Requests</a>
+    </div>
+
+    <form asp-action="Create" method="post" class="erp-form">
+        @Html.AntiForgeryToken()
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Invoice Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="InvoiceNumber">Invoice Number</label>
+                            <input class="form-control" id="InvoiceNumber" name="InvoiceNumber" placeholder="INV-2026-00112" />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="InvoiceDate">Invoice Date</label>
+                                <input class="form-control" id="InvoiceDate" type="date" name="InvoiceDate" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="InvoiceValue">Invoice Value</label>
+                                <input class="form-control" id="InvoiceValue" name="InvoiceValue" placeholder="₹ 0.00" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Customer">Customer</label>
+                            <input class="form-control" id="Customer" name="Customer" placeholder="Customer name" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="GstNumber">Customer GST</label>
+                            <input class="form-control" id="GstNumber" name="GstNumber" placeholder="27ABCDE1234F1Z5" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Cancellation Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="RequestDate">Request Date</label>
+                            <input class="form-control" id="RequestDate" type="date" name="RequestDate" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Reason">Reason for Cancellation</label>
+                            <select class="form-select" id="Reason" name="Reason">
+                                <option value="">Select reason</option>
+                                <option value="RateCorrection">Rate correction required</option>
+                                <option value="CustomerChange">Change in customer details</option>
+                                <option value="Duplicate">Duplicate invoice</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Remarks">Remarks</label>
+                            <textarea class="form-control" id="Remarks" name="Remarks" rows="4" placeholder="Provide detailed explanation"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="SupportingDocument">Supporting Document Reference</label>
+                            <input class="form-control" id="SupportingDocument" name="SupportingDocument" placeholder="Enter document number / link" />
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" id="StockReversal" name="StockReversal" type="checkbox" />
+                            <label class="form-check-label" for="StockReversal">Stock reversal required</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" id="FinanceNotified" name="FinanceNotified" type="checkbox" />
+                            <label class="form-check-label" for="FinanceNotified">Finance team notified</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="card-title mb-0">Approval Workflow</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle erp-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Role</th>
+                                <th scope="col">Approver</th>
+                                <th scope="col">Decision</th>
+                                <th scope="col">Remarks</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Accounts Supervisor</td>
+                                <td>
+                                    <input class="form-control" name="Workflow[0].Approver" placeholder="Name" />
+                                </td>
+                                <td>
+                                    <select class="form-select" name="Workflow[0].Decision">
+                                        <option value="">Pending</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Workflow[0].Remarks" placeholder="Remarks" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Workflow[0].Date" type="date" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Finance Head</td>
+                                <td>
+                                    <input class="form-control" name="Workflow[1].Approver" placeholder="Name" />
+                                </td>
+                                <td>
+                                    <select class="form-select" name="Workflow[1].Decision">
+                                        <option value="">Pending</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Workflow[1].Remarks" placeholder="Remarks" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="Workflow[1].Date" type="date" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions mt-4">
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+            <button type="reset" class="btn btn-outline-secondary">Clear</button>
+        </div>
+    </form>
+</section>

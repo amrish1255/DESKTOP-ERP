@@ -3,44 +3,105 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebCode</title>
+    <title>@ViewData["Title"] - Desktop ERP</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebCode.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Desktop.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebCode</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+<body class="app-body">
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? string.Empty;
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? string.Empty;
+    string MenuClass(string controller, string? action = null)
+    {
+        var ctrlMatch = string.Equals(controller, currentController, StringComparison.OrdinalIgnoreCase);
+        var actionMatch = string.IsNullOrEmpty(action) || string.Equals(action, currentAction, StringComparison.OrdinalIgnoreCase);
+        return ctrlMatch && actionMatch ? "menu-item is-active" : "menu-item";
+    }
+}
+    <header class="top-nav">
+        <div class="top-nav__inner">
+            <a class="top-nav__brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <span class="brand-mark">Desktop</span> ERP
+            </a>
+            <nav class="top-nav__menu">
+                <a class="top-nav__link @(string.Equals(currentController, "Home", StringComparison.OrdinalIgnoreCase) ? "is-active" : string.Empty)"
+                   asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+                <a class="top-nav__link @(string.Equals(currentController, "Sales", StringComparison.OrdinalIgnoreCase) ? "is-active" : string.Empty)"
+                   asp-area="" asp-controller="Sales" asp-action="Index">Sales</a>
+                <a class="top-nav__link @(string.Equals(currentController, "Payment", StringComparison.OrdinalIgnoreCase) ? "is-active" : string.Empty)"
+                   asp-area="" asp-controller="Payment" asp-action="Index">Payments</a>
+                <a class="top-nav__link @(string.Equals(currentController, "Reports", StringComparison.OrdinalIgnoreCase) ? "is-active" : string.Empty)"
+                   asp-area="" asp-controller="Reports" asp-action="Index">Reports</a>
+                <a class="top-nav__link @(string.Equals(currentController, "CancelInvoice", StringComparison.OrdinalIgnoreCase) ? "is-active" : string.Empty)"
+                   asp-area="" asp-controller="CancelInvoice" asp-action="Index">Cancel Bill</a>
+            </nav>
+            <div class="top-nav__actions">
+                <span class="status-pill success nav-pill">DB: LocalDB</span>
+                <a class="top-nav__btn" asp-area="" asp-controller="Reports" asp-action="SalesReport">Quick Report</a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - WebCode - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </header>
+    <div class="erp-dashboard-root">
+        <section class="erp-dashboard">
+            <aside class="erp-dashboard__sidebar">
+                <div class="erp-dashboard__brand">
+                    <span class="erp-dashboard__brand-icon" aria-hidden="true">
+                        <svg viewBox="0 0 32 32" class="icon">
+                            <path d="M6 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v18a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z" />
+                            <path d="M11 11h10v4H11z" opacity=".35" />
+                            <path d="M11 18h6v4h-6z" opacity=".55" />
+                        </svg>
+                    </span>
+                    <span class="erp-dashboard__brand-text">ERP System</span>
+                </div>
+                <nav class="erp-dashboard__menu">
+                    <a class="@(MenuClass("Home"))" asp-area="" asp-controller="Home" asp-action="Index">
+                        <span class="menu-icon" aria-hidden="true">@Html.Raw("<svg viewBox=\"0 0 24 24\" class=\"icon\"><path d=\"M3 11.5 12 4l9 7.5V21a1 1 0 0 1-1 1h-6v-5h-4v5H4a1 1 0 0 1-1-1z\"/></svg>")</span>
+                        Dashboard
+                    </a>
+                    <a class="@(MenuClass("Company"))" asp-area="" asp-controller="Company" asp-action="Index">
+                        <span class="menu-icon" aria-hidden="true">@Html.Raw("<svg viewBox=\"0 0 24 24\" class=\"icon\"><path d=\"M4 5h16v7H4z\"/><path d=\"M4 12h16l-2 7H6z\" opacity=\".35\"/></svg>")</span>
+                        Company / Branch
+                    </a>
+                    <a class="@(MenuClass("Party"))" asp-area="" asp-controller="Party" asp-action="Index">
+                        <span class="menu-icon" aria-hidden="true">@Html.Raw("<svg viewBox=\"0 0 24 24\" class=\"icon\"><path d=\"M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4z\"/><path d=\"M4 20a8 8 0 0 1 16 0v1H4z\" opacity=\".35\"/></svg>")</span>
+                        Party Master
+                    </a>
+                    <a class="@(MenuClass("Item"))" asp-area="" asp-controller="Item" asp-action="Index">
+                        <span class="menu-icon" aria-hidden="true">@Html.Raw("<svg viewBox=\"0 0 24 24\" class=\"icon\"><path d=\"M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z\"/><path d=\"M9 8h6v8H9z\" opacity=\".35\"/></svg>")</span>
+                        Inventory
+                    </a>
+                    <a class="@(MenuClass("Sales"))" asp-area="" asp-controller="Sales" asp-action="Index">
+                        <span class="menu-icon" aria-hidden="true">@Html.Raw("<svg viewBox=\"0 0 24 24\" class=\"icon\"><path d=\"M3 5h18v6H3z\"/><path d=\"M6 13h12v6H6z\" opacity=\".35\"/></svg>")</span>
+                        Sales Billing
+                    </a>
+                    <a class="@(MenuClass("Payment"))" asp-area="" asp-controller="Payment" asp-action="Index">
+                        <span class="menu-icon" aria-hidden="true">@Html.Raw("<svg viewBox=\"0 0 24 24\" class=\"icon\"><path d=\"M4 5h16v14H4z\"/><path d=\"M7 8h10v2H7zM7 12h6v2H7z\" fill=\"#e2e8f0\"/></svg>")</span>
+                        Payment &amp; Ledger
+                    </a>
+                    <a class="@(MenuClass("CancelInvoice"))" asp-area="" asp-controller="CancelInvoice" asp-action="Index">
+                        <span class="menu-icon" aria-hidden="true">@Html.Raw("<svg viewBox=\"0 0 24 24\" class=\"icon\"><path d=\"M5 5h14v14H5z\" opacity=\".35\"/><path d=\"m9 9 6 6m0-6-6 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>")</span>
+                        Cancel Bill
+                    </a>
+                    <a class="@(MenuClass("Reports"))" asp-area="" asp-controller="Reports" asp-action="Index">
+                        <span class="menu-icon" aria-hidden="true">@Html.Raw("<svg viewBox=\"0 0 24 24\" class=\"icon\"><path d=\"M4 4h8v16H4z\"/><path d=\"M14 8h6v12h-6z\" opacity=\".35\"/></svg>")</span>
+                        Reports
+                    </a>
+                </nav>
+                <div class="erp-dashboard__footer">.NET 8 &amp; SQL Server Express</div>
+            </aside>
+            <div class="erp-dashboard__main">
+                <main role="main" class="erp-main-wrapper page-transition is-active">
+                    @RenderBody()
+                </main>
+                <footer class="border-top footer text-muted">
+                    <div class="container">
+                        &copy; 2026 - Desktop ERP Suite
+                    </div>
+                </footer>
+            </div>
+        </section>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

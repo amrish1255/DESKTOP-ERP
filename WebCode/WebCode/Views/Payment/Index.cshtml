@@ -1,0 +1,110 @@
+@{
+    ViewData["Title"] = "Payments & Outstanding";
+}
+
+<section class="erp-section">
+    <div class="section-header">
+        <h1>Payment &amp; Outstanding</h1>
+        <div class="section-actions">
+            <a class="btn btn-primary" asp-action="Create">Record Payment</a>
+            <button type="button" class="btn btn-outline-secondary">Aging Report</button>
+        </div>
+    </div>
+
+    <form class="filter-panel row g-3 align-items-end" method="get">
+        <div class="col-lg-3">
+            <label class="form-label" for="Party">Party</label>
+            <input class="form-control" id="Party" name="party" placeholder="Customer / Supplier" />
+        </div>
+        <div class="col-lg-3">
+            <label class="form-label" for="Invoice">Invoice #</label>
+            <input class="form-control" id="Invoice" name="invoice" placeholder="Invoice reference" />
+        </div>
+        <div class="col-lg-2">
+            <label class="form-label" for="DueIn">Due In (days)</label>
+            <select class="form-select" id="DueIn" name="dueIn">
+                <option value="">All</option>
+                <option value="0">Overdue</option>
+                <option value="7">Next 7 Days</option>
+                <option value="15">Next 15 Days</option>
+                <option value="30">Next 30 Days</option>
+            </select>
+        </div>
+        <div class="col-lg-2">
+            <label class="form-label" for="Status">Status</label>
+            <select class="form-select" id="Status" name="status">
+                <option value="">All</option>
+                <option value="Pending">Pending</option>
+                <option value="Partial">Partial</option>
+                <option value="Paid">Paid</option>
+            </select>
+        </div>
+        <div class="col-lg-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">Filter</button>
+            <button type="reset" class="btn btn-link flex-fill">Reset</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover erp-table">
+            <thead>
+                <tr>
+                    <th scope="col">Invoice #</th>
+                    <th scope="col">Party</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Received</th>
+                    <th scope="col">Outstanding</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>INV-2026-00121</td>
+                    <td>Sunrise Traders</td>
+                    <td>05 Feb 2026</td>
+                    <td>₹ 98,400.00</td>
+                    <td>₹ 50,000.00</td>
+                    <td class="text-danger fw-semibold">₹ 48,400.00</td>
+                    <td><span class="status-badge status-partial">Partial</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <a class="btn btn-sm btn-outline-primary" asp-action="Create">Receive</a>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">History</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>INV-2026-00118</td>
+                    <td>Metro Retail Mart</td>
+                    <td>28 Jan 2026</td>
+                    <td>₹ 65,700.00</td>
+                    <td>₹ 65,700.00</td>
+                    <td class="text-success fw-semibold">₹ 0.00</td>
+                    <td><span class="status-badge status-paid">Paid</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Receipt</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>BILL-2026-00045</td>
+                    <td>Global Supply Hub</td>
+                    <td>15 Feb 2026</td>
+                    <td>₹ 1,45,000.00</td>
+                    <td>₹ 0.00</td>
+                    <td class="text-danger fw-semibold">₹ 1,45,000.00</td>
+                    <td><span class="status-badge status-pending">Pending</span></td>
+                    <td class="text-end">
+                        <div class="table-actions">
+                            <a class="btn btn-sm btn-outline-primary" asp-action="Create">Receive</a>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Reminder</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
